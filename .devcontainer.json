@@ -1,0 +1,11 @@
+{
+  "name": "Xray",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "forwardPorts": [80, 443],
+  "hostRequirements": {
+    "cpus": 2
+  }
+}
