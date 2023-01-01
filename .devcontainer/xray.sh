@@ -36,7 +36,7 @@ echo "Downloading binary file: ${XRAY_FILE}"
 echo "Downloading binary file: ${DGST_FILE}"
 
 wget -O ${PWD}/xray.zip https://github.com/XTLS/Xray-core/releases/download/${TAG}/${XRAY_FILE} >/dev/null 2>&1
-wget -O ${PWD}/xray.zip.dgst https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${DGST_FILE} >/dev/null 2>&1
+wget -O ${PWD}/xray.zip.dgst https://github.com/XTLS/Xray-core/releases/download/${TAG}/${DGST_FILE} >/dev/null 2>&1
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to download binary file: ${XRAY_FILE} ${DGST_FILE}" && exit 1
@@ -44,10 +44,10 @@ fi
 echo "Download binary file: ${XRAY_FILE} ${DGST_FILE} completed"
 
 # Check SHA512
-LOCAL=$(openssl dgst -sha512 xray.zip | sed 's/([^)]*)//g')
-STR=$(cat xray.zip.dgst | grep 'SHA512' | head -n1)
+SUM=$(openssl dgst -sha512 xray.zip | sed 's/.* //g')
+CHECKSUM=$(cat xray.zip.dgst | grep 'SHA2-512' | sed 's/.* //g')
 
-if [ "${LOCAL}" = "${STR}" ]; then
+if [ "${SUM}" = "${CHECKSUM}" ]; then
     echo " Check passed" && rm -fv xray.zip.dgst
 else
     echo " Check have not passed yet " && exit 1
@@ -58,7 +58,6 @@ echo "Prepare to use"
 unzip xray.zip && chmod +x xray
 mv xray /usr/local/bin/
 mv geosite.dat geoip.dat /usr/local/share/xray/
-mv config.json /usr/local/etc/xray/config.json
 
 # Clean
 rm -rf ${PWD}/*
