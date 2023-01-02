@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx
 
 ARG TARGETPLATFORM
 ARG TAG
