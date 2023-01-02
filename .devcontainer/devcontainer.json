@@ -17,7 +17,6 @@
   },
   "postAttachCommand": {
     "public": "gh codespace ports visibility 443:public -c $CODESPACE_NAME",
-    "nginx": "service nginx start",
     "xray": "/usr/local/bin/xray -c /usr/local/etc/xray/config.json"
   },
   "portsAttributes": {

@@ -1,9 +1,8 @@
-FROM nginx
+FROM ubuntu:focal
 
 ARG TARGETPLATFORM
 ARG TAG
 
-COPY xray.conf /etc/nginx/conf.d/default.conf
 COPY xray.sh /root/xray.sh
 
 WORKDIR /root
